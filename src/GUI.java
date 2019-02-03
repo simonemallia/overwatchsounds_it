@@ -128,7 +128,7 @@ public class GUI extends JFrame {
 		mntmVaiAlSito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					URI sitoweb = new URI("https://github.com/simonemallia/overwatchsound_it");
+					URI sitoweb = new URI("https://github.com/simonemallia/overwatchsounds_it");
 					if (Desktop.isDesktopSupported()) {
 						Desktop.getDesktop().browse(sitoweb);
 					}
@@ -252,7 +252,7 @@ public class GUI extends JFrame {
 		panel_2.add(table);
 		
 		int suonirein = table.getRowCount();
-		lblSuoniRein = new JLabel("Suoni presenti:" + Integer.toString(suonirein));
+		lblSuoniRein = new JLabel("Suoni presenti: " + Integer.toString(suonirein));
 		lblSuoniRein.setFont(new Font("Dialog", Font.BOLD, 11));
 		
 		lblSuoniRein.setHorizontalAlignment(SwingConstants.CENTER);
@@ -337,7 +337,7 @@ public class GUI extends JFrame {
 		panel_3.add(table_1);
 
 		int suoniwinston = table_1.getRowCount();
-		lblSuoniWinston = new JLabel("Suoni presenti:" + Integer.toString(suoniwinston));
+		lblSuoniWinston = new JLabel("Suoni presenti: " + Integer.toString(suoniwinston));
 		lblSuoniWinston.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuoniWinston.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_3.add(lblSuoniWinston, BorderLayout.NORTH);
