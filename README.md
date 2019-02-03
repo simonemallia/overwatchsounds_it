@@ -1,5 +1,5 @@
 # overwatchsounds_it
-This desktop application contains all voices line of your favourite heroes in Overwatch in italian version!
+This desktop application written in Java contains all voices line of your favourite heroes in Overwatch in italian version!
 
 This is the first realease v0.01a:
 - Added Reinhardt and Winston voices line;
