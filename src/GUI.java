@@ -48,6 +48,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Cursor;
 
+import javazoom.jl.decoder.*;
+import javazoom.jl.player.advanced.*;
+
 public class GUI extends JFrame {
 
 	private static JPanel contentPane;
@@ -56,6 +59,7 @@ public class GUI extends JFrame {
 	ImageIcon delete = new ImageIcon (getClass().getResource("delete.png"));
 	ImageIcon reinicon = new ImageIcon(getClass().getResource("reinicon.png"));
 	ImageIcon winicon = new ImageIcon(getClass().getResource("winicon.png"));
+	ImageIcon dvaicon = new ImageIcon (getClass().getResource("dvaicon.png"));
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -73,6 +77,10 @@ public class GUI extends JFrame {
 	private JLabel lblSuoniRein;
 	private JLabel lblSuoniWinston;
 	private JLabel lblCancella;
+	private JScrollPane scrollPane_2;
+	private JPanel panel_4;
+	private JTable table_2;
+	private JLabel lblSuoniDva;
 
 	/**
 	 * Launch the application.
@@ -119,7 +127,7 @@ public class GUI extends JFrame {
 		JMenuItem mntmCredits = new JMenuItem("Credits");
 		mntmCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.01a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.02a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(mntmCredits);
@@ -199,54 +207,50 @@ public class GUI extends JFrame {
 		Object[] rowrein = new Object[1];
 		for (String line = br.readLine(); line != null; line = br.readLine()) {	
 		rowrein[0] = line;
-		modelrein.addRow(rowrein);	
+		modelrein.addRow(rowrein);
 		}
 		br.close();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
 				Popup riproduzione = new Popup();
-				LineListener listener = new LineListener() {
-					@Override
-					public void update(LineEvent event) {
-						if (event.getType() == LineEvent.Type.START) {
-							riproduzione.setLocationRelativeTo(contentPane);
-							riproduzione.setVisible(true);
-							
-							
-						} else if (event.getType() == LineEvent.Type.STOP) {
-							riproduzione.dispose();
-							
-						}
-					}
-					
-				};
+                    new Thread(){	
+					public void run() {
+				
 				           try {
 				            	int index = table.getSelectedRow();
 				            	int convertrow = table.convertRowIndexToModel(index);
 				                String value = modelrein.getValueAt(convertrow, 0).toString();
-				                AudioInputStream audio;
-								audio = AudioSystem.getAudioInputStream((getClass().getResource("/reinhardt/" + value)));			
-								Clip clip = AudioSystem.getClip();
-								clip.addLineListener(listener);
-								clip.open(audio);
-								clip.start();
-								riproduzione.lblStop.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										clip.stop();
-									}
-								});
-								} catch (UnsupportedAudioFileException | IOException e1) {
-									e1.printStackTrace();
-								} catch (LineUnavailableException e1) {
-									e1.printStackTrace();
+				                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("reinhardt/" + value));			
+								audio.setPlayBackListener(new PlaybackListener() {
+			                        @Override
+			                        public void playbackStarted(PlaybackEvent evt){
+			                        	riproduzione.setLocationRelativeTo(contentPane);
+										riproduzione.setVisible(true);
+										  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+					    						@Override
+					    						public void mouseClicked(MouseEvent e) {
+					    						audio.stop();
+					    						}
+					    					});
+			                        	
+			                        }
+			                        public void playbackFinished(PlaybackEvent event) {
+			                        	riproduzione.dispose();
+			                        }
+									});   
+			                        audio.play();
+			                       	                        
+								    
 								} catch (ArrayIndexOutOfBoundsException e1) {
 									JOptionPane.showMessageDialog(scrollPane, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+								} catch (JavaLayerException e1) {
+									e1.printStackTrace();
 								}
 
 					}
+			        }.start();                  	        
+			}
 				
 		});
 		panel_2.add(table);
@@ -266,10 +270,9 @@ public class GUI extends JFrame {
 		scrollPane_1.setViewportView(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		table_1 = new JTable();
-		
 		//Start Winston Table
 		
+		table_1 = new JTable();
 		DefaultTableModel modelwinston = new DefaultTableModel() {
 			@Override
 		    public boolean isCellEditable(int row, int column) {
@@ -290,50 +293,46 @@ public class GUI extends JFrame {
 		table_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				Popup riproduzione = new Popup();
-				LineListener listener = new LineListener() {
-					@Override
-					public void update(LineEvent event) {
-						if (event.getType() == LineEvent.Type.START) {
-							riproduzione.setLocationRelativeTo(contentPane);
-							riproduzione.setVisible(true);
-							
-							
-						} else if (event.getType() == LineEvent.Type.STOP) {
-							riproduzione.setVisible(false);
-							
-						}
-					}
-					
-				};
-				           try {
-				            	int index = table_1.getSelectedRow();
-				            	int convertrow = table_1.convertRowIndexToModel(index);
-				                String value = modelwinston.getValueAt(convertrow, 0).toString();
-				                AudioInputStream audio;
-								audio = AudioSystem.getAudioInputStream(getClass().getResource("/winston/" + value));
-								Clip clip = AudioSystem.getClip();
-								clip.addLineListener(listener);
-								clip.open(audio);
-								clip.start();
-								riproduzione.lblStop.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										clip.stop();
-									}
-								});
-								} catch (UnsupportedAudioFileException | IOException e1) {
-									e1.printStackTrace();
-								} catch (LineUnavailableException e1) {
-									e1.printStackTrace();
-								} catch (ArrayIndexOutOfBoundsException e1) {
-									JOptionPane.showMessageDialog(scrollPane_1, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
-								}
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_1.getSelectedRow();
+			            	int convertrow = table_1.convertRowIndexToModel(index);
+			                String value = modelwinston.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("winston/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
 
-					}
-				
-		});
+				}
+		        }.start();                  	        
+		}
+			
+	});
 		panel_3.add(table_1);
 
 		int suoniwinston = table_1.getRowCount();
@@ -342,13 +341,94 @@ public class GUI extends JFrame {
 		lblSuoniWinston.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_3.add(lblSuoniWinston, BorderLayout.NORTH);
 		
+		scrollPane_2 = new JScrollPane();
+		tabbedPane.addTab("D.va", dvaicon, scrollPane_2, null);
+		
+		panel_4 = new JPanel();
+		scrollPane_2.setViewportView(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		//Start Dva Table
+		table_2 = new JTable();		
+		DefaultTableModel modeldva = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_2.setModel(modeldva);
+    	modeldva.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputdva = getClass().getClassLoader().getResourceAsStream("dva/masterlistdva.txt");
+    	InputStreamReader inputdvareader = new InputStreamReader (inputdva);
+    	BufferedReader brdva = new BufferedReader (inputdvareader);
+		Object[] rowdva = new Object[1];
+		for (String line3 = brdva.readLine(); line3 != null; line3 = brdva.readLine()) {
+		rowdva[0] = line3;
+		modeldva.addRow(rowdva);
+		}
+		br.close();
+		table_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_2.getSelectedRow();
+			            	int convertrow = table_2.convertRowIndexToModel(index);
+			                String value = modeldva.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("dva/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		
+		panel_4.add(table_2, BorderLayout.CENTER);
+		
+		
+		int suonidva = table_2.getRowCount();
+		lblSuoniDva = new JLabel("Suoni presenti: " + Integer.toString(suonidva));
+		lblSuoniDva.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniDva.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_4.add(lblSuoniDva, BorderLayout.NORTH);
+		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		textField = new JTextField();
 		
-		TableRowSorter<DefaultTableModel>filter = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table.getModel());
+		TableRowSorter<DefaultTableModel>filter  = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table.getModel());
 	    TableRowSorter<DefaultTableModel>filter1 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_1.getModel());
+	    TableRowSorter<DefaultTableModel>filter2 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_2.getModel());
+
 
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -364,6 +444,10 @@ public class GUI extends JFrame {
 			       String text1 = textField.getText();
 			       filter1.setRowFilter(RowFilter.regexFilter(text1)); 
 			       
+			       //Dva
+			       table_2.setRowSorter(filter2);
+			       String text2 = textField.getText();
+			       filter2.setRowFilter(RowFilter.regexFilter(text2)); 
 			}
 		});
 		
@@ -380,6 +464,8 @@ public class GUI extends JFrame {
 				textField.setText("");
 				filter.setRowFilter(RowFilter.regexFilter(""));
 			    filter1.setRowFilter(RowFilter.regexFilter(""));
+			    filter2.setRowFilter(RowFilter.regexFilter(""));
+
 			}
 		});
 		lblCancella.setIcon(delete);
