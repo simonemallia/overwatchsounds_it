@@ -2,8 +2,8 @@
 This desktop application written in Java contains all voices line of your favourite heroes in Overwatch in italian version!
 
 New Update v0.02a:
-- Added D.va voices line
-- Optimized size: wav sounds converted to mp3
+- Added D.va voices line;
+- Optimized size: wav sounds converted to mp3;
 
 
 v0.01a:
