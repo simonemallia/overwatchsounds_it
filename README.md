@@ -1,7 +1,12 @@
 # overwatchsounds_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New Update v0.02a:
+New update v0.03a:
+- Added License dialog;
+- UI enhanced and bug fixes;
+- Added Orisa voice lines;
+
+v0.02a:
 - Added D.va voice lines;
 - Optimized size: wav sounds converted to mp3;
 
