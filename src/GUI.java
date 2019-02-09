@@ -342,6 +342,7 @@ public class GUI extends JFrame {
 		panel_3.add(lblSuoniWinston, BorderLayout.NORTH);
 		
 		scrollPane_2 = new JScrollPane();
+		scrollPane_2.getVerticalScrollBar().setUnitIncrement(16);
 		tabbedPane.addTab("D.va", dvaicon, scrollPane_2, null);
 		
 		panel_4 = new JPanel();
