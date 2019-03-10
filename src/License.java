@@ -9,26 +9,6 @@ import javax.swing.border.BevelBorder;
 
 public class License extends JDialog {
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					License dialog = new License();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public License() {
 		setModal(true);
 		setAlwaysOnTop(true);

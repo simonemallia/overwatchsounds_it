@@ -61,6 +61,9 @@ public class GUI extends JFrame {
 	ImageIcon winicon = new ImageIcon(getClass().getResource("winicon.png"));
 	ImageIcon dvaicon = new ImageIcon (getClass().getResource("dvaicon.png"));
 	ImageIcon orisaicon = new ImageIcon (getClass().getResource("orisaicon.png"));
+	ImageIcon hogicon = new ImageIcon (getClass().getResource("hogicon.png"));
+	ImageIcon wreckicon = new ImageIcon (getClass().getResource("wreckicon.png"));
+	ImageIcon zaryaicon = new ImageIcon (getClass().getResource("zaryaicon.png"));
 
 	private JLabel label;
 	private JLabel label_1;
@@ -88,6 +91,18 @@ public class GUI extends JFrame {
 	private JPanel panel_5;
 	private JTable table_3;
 	private JLabel lblSuoniOrisa;
+	private JScrollPane scrollPane_4;
+	private JPanel panel_6;
+	private JTable table_4;
+	private JLabel lblSuoniHog;
+	private JScrollPane scrollPane_5;
+	private JPanel panel_7;
+	private JTable table_5;
+	private JLabel lblSuoniWreck;
+	private JScrollPane scrollPane_6;
+	private JPanel panel_8;
+	private JTable table_6;
+	private JLabel lblSuoniZarya;
 
 	/**
 	 * Launch the application.
@@ -134,7 +149,7 @@ public class GUI extends JFrame {
 		JMenuItem mntmCredits = new JMenuItem("Credits");
 		mntmCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.03a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.04a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(mntmCredits);
@@ -199,6 +214,7 @@ public class GUI extends JFrame {
 		panel.add(label_2);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		scrollPane = new JScrollPane();
@@ -308,7 +324,7 @@ public class GUI extends JFrame {
 		rowwin[0] = line2;
 		modelwinston.addRow(rowwin);
 		}
-		br.close();
+		brwin.close();
 		table_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -386,7 +402,7 @@ public class GUI extends JFrame {
 		rowdva[0] = line3;
 		modeldva.addRow(rowdva);
 		}
-		br.close();
+		brdva.close();
 		table_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -466,7 +482,7 @@ public class GUI extends JFrame {
 		roworisa[0] = line4;
 		modelorisa.addRow(roworisa);
 		}
-		br.close();
+		brorisa.close();
 		table_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -519,6 +535,240 @@ public class GUI extends JFrame {
 		lblSuoniOrisa.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_5.add(lblSuoniOrisa, BorderLayout.NORTH);
 		
+		scrollPane_4 = new JScrollPane();
+		scrollPane_4.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Roadhog", hogicon, scrollPane_4, null);
+		
+		panel_6 = new JPanel();
+		scrollPane_4.setViewportView(panel_6);
+		panel_6.setLayout(new BorderLayout(0, 0));
+		
+		//Start Roadhog table
+		table_4 = new JTable();
+		DefaultTableModel modelhog = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_4.setModel(modelhog);
+    	modelhog.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputhog = getClass().getClassLoader().getResourceAsStream("roadhog/masterlisthog.txt");
+    	InputStreamReader inputhogreader = new InputStreamReader (inputhog);
+    	BufferedReader brhog = new BufferedReader (inputhogreader);
+		Object[] rowhog = new Object[1];
+		for (String line5 = brhog.readLine(); line5 != null; line5 = brhog.readLine()) {
+		rowhog[0] = line5;
+		modelhog.addRow(rowhog);
+		}
+		brhog.close();
+		table_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_4.getSelectedRow();
+			            	int convertrow = table_4.convertRowIndexToModel(index);
+			                String value = modelhog.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("roadhog/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_4, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_6.add(table_4, BorderLayout.CENTER);
+		
+		int suonihog = table_4.getRowCount();
+		lblSuoniHog = new JLabel("Suoni presenti: " + Integer.toString(suonihog));
+		lblSuoniHog.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniHog.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_6.add(lblSuoniHog, BorderLayout.NORTH);
+		
+		scrollPane_5 = new JScrollPane();
+		scrollPane_5.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Wrecking Ball", wreckicon, scrollPane_5, null);
+		
+		panel_7 = new JPanel();
+		scrollPane_5.setViewportView(panel_7);
+		panel_7.setLayout(new BorderLayout(0, 0));
+		
+		//Start Wreck Table
+		table_5 = new JTable();
+		DefaultTableModel modelwreck = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_5.setModel(modelwreck);
+    	modelwreck.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputwreck = getClass().getClassLoader().getResourceAsStream("wreckingball/masterlistwreck.txt");
+    	InputStreamReader inputwreckreader = new InputStreamReader (inputwreck);
+    	BufferedReader brwreck = new BufferedReader (inputwreckreader);
+		Object[] rowwreck = new Object[1];
+		for (String line6 = brwreck.readLine(); line6 != null; line6 = brwreck.readLine()) {
+		rowwreck[0] = line6;
+		modelwreck.addRow(rowwreck);
+		}
+		brwreck.close();
+		table_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_5.getSelectedRow();
+			            	int convertrow = table_5.convertRowIndexToModel(index);
+			                String value = modelwreck.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("wreckingball/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_5, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_7.add(table_5, BorderLayout.CENTER);
+		
+		int suoniwreck = table_5.getRowCount();
+		lblSuoniWreck = new JLabel("Suoni presenti: " + Integer.toString(suoniwreck));
+		lblSuoniWreck.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniWreck.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(lblSuoniWreck, BorderLayout.NORTH);
+		
+		scrollPane_6 = new JScrollPane();
+		scrollPane_6.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Zarya", zaryaicon, scrollPane_6, null);
+		
+		panel_8 = new JPanel();
+		scrollPane_6.setViewportView(panel_8);
+		panel_8.setLayout(new BorderLayout(0, 0));
+		
+		//Start Zarya Table
+		table_6 = new JTable();
+		DefaultTableModel modelzarya = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_6.setModel(modelzarya);
+    	modelzarya.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputzarya = getClass().getClassLoader().getResourceAsStream("zarya/masterlistzarya.txt");
+    	InputStreamReader inputzaryareader = new InputStreamReader (inputzarya);
+    	BufferedReader brzarya = new BufferedReader (inputzaryareader);
+		Object[] rowzarya = new Object[1];
+		for (String line7 = brzarya.readLine(); line7 != null; line7 = brzarya.readLine()) {
+		rowzarya[0] = line7;
+		modelzarya.addRow(rowzarya);
+		}
+		brzarya.close();
+		table_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_6.getSelectedRow();
+			            	int convertrow = table_6.convertRowIndexToModel(index);
+			                String value = modelzarya.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("zarya/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_6, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_8.add(table_6, BorderLayout.CENTER);
+		
+		int suonizarya = table_6.getRowCount();
+		lblSuoniZarya = new JLabel("Suoni presenti: " + Integer.toString(suonizarya));
+		lblSuoniZarya.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniZarya.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_8.add(lblSuoniZarya, BorderLayout.NORTH);
+		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
@@ -528,6 +778,9 @@ public class GUI extends JFrame {
 	    TableRowSorter<DefaultTableModel>filter1 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_1.getModel());
 	    TableRowSorter<DefaultTableModel>filter2 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_2.getModel());
 	    TableRowSorter<DefaultTableModel>filter3 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_3.getModel());
+	    TableRowSorter<DefaultTableModel>filter4 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_4.getModel());
+	    TableRowSorter<DefaultTableModel>filter5 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_5.getModel());
+	    TableRowSorter<DefaultTableModel>filter6 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_6.getModel());
 
 
 		textField.addKeyListener(new KeyAdapter() {
@@ -553,6 +806,21 @@ public class GUI extends JFrame {
 			       table_3.setRowSorter(filter3);
 			       String text3 = textField.getText();
 			       filter3.setRowFilter(RowFilter.regexFilter(text3)); 
+			       
+			       //Roadhog
+			       table_4.setRowSorter(filter4);
+			       String text4 = textField.getText();
+			       filter4.setRowFilter(RowFilter.regexFilter(text4));
+			       
+			       //Wreck
+			       table_5.setRowSorter(filter5);
+			       String text5 = textField.getText();
+			       filter5.setRowFilter(RowFilter.regexFilter(text5));
+			       
+			       //Zarya
+			       table_6.setRowSorter(filter6);
+			       String text6 = textField.getText();
+			       filter6.setRowFilter(RowFilter.regexFilter(text6));
 			}
 		});
 		
@@ -571,6 +839,10 @@ public class GUI extends JFrame {
 			    filter1.setRowFilter(RowFilter.regexFilter(""));
 			    filter2.setRowFilter(RowFilter.regexFilter(""));
 			    filter3.setRowFilter(RowFilter.regexFilter(""));
+			    filter4.setRowFilter(RowFilter.regexFilter(""));
+			    filter5.setRowFilter(RowFilter.regexFilter(""));
+			    filter6.setRowFilter(RowFilter.regexFilter(""));
+
 
 
 			}
