@@ -1,7 +1,10 @@
 # overwatchsounds_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New update v0.03a:
+New update v0.04a:
+-Added Roadhog, Wrecking Ball and Zarya voice lines;
+
+v0.03a:
 - Added License dialog;
 - UI enhanced and bug fixes;
 - Added Orisa voice lines;
@@ -18,4 +21,4 @@ This application is under construction so many heroes will be added soon.
 
 Download the application here:
 
-https://ufile.io/6yqov
+https://ufile.io/6dg59
