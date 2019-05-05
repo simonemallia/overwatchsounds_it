@@ -64,6 +64,10 @@ public class GUI extends JFrame {
 	ImageIcon hogicon = new ImageIcon (getClass().getResource("hogicon.png"));
 	ImageIcon wreckicon = new ImageIcon (getClass().getResource("wreckicon.png"));
 	ImageIcon zaryaicon = new ImageIcon (getClass().getResource("zaryaicon.png"));
+	ImageIcon genjicon = new ImageIcon (getClass().getResource("genjicon.png"));
+	ImageIcon torbicon = new ImageIcon (getClass().getResource("torbicon.png"));
+	ImageIcon hanzoicon = new ImageIcon (getClass().getResource("hanzoicon.png"));
+	ImageIcon doomicon = new ImageIcon (getClass().getResource("doomicon.png"));
 
 	private JLabel label;
 	private JLabel label_1;
@@ -103,6 +107,22 @@ public class GUI extends JFrame {
 	private JPanel panel_8;
 	private JTable table_6;
 	private JLabel lblSuoniZarya;
+	private JScrollPane scrollPane_7;
+	private JPanel panel_9;
+	private JTable table_7;
+	private JLabel lblSuoniGenji;
+	private JScrollPane scrollPane_8;
+	private JPanel panel_10;
+	private JTable table_8;
+	private JLabel lblSuoniTorbjon;
+	private JScrollPane scrollPane_9;
+	private JPanel panel_11;
+	private JTable table_9;
+	private JLabel lblSuoniHanzo;
+	private JScrollPane scrollPane_10;
+	private JPanel panel_12;
+	private JTable table_10;
+	private JLabel lblSuoniDoom;
 
 	/**
 	 * Launch the application.
@@ -149,7 +169,7 @@ public class GUI extends JFrame {
 		JMenuItem mntmCredits = new JMenuItem("Credits");
 		mntmCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.04a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.05a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(mntmCredits);
@@ -769,6 +789,319 @@ public class GUI extends JFrame {
 		lblSuoniZarya.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_8.add(lblSuoniZarya, BorderLayout.NORTH);
 		
+		scrollPane_7 = new JScrollPane();
+		scrollPane_7.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Genji", genjicon, scrollPane_7, null);
+		
+		panel_9 = new JPanel();
+		scrollPane_7.setViewportView(panel_9);
+		panel_9.setLayout(new BorderLayout(0, 0));
+		
+		//Start Genji Table
+		table_7 = new JTable();
+		DefaultTableModel modelgenji = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_7.setModel(modelgenji);
+    	modelgenji.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputgenji = getClass().getClassLoader().getResourceAsStream("genji/masterlistgenji.txt");
+    	InputStreamReader inputgenjireader = new InputStreamReader (inputgenji);
+    	BufferedReader brgenji = new BufferedReader (inputgenjireader);
+		Object[] rowgenji = new Object[1];
+		for (String line8 = brgenji.readLine(); line8 != null; line8 = brgenji.readLine()) {
+		rowgenji[0] = line8;
+		modelgenji.addRow(rowgenji);
+		}
+		brgenji.close();
+		table_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_7.getSelectedRow();
+			            	int convertrow = table_7.convertRowIndexToModel(index);
+			                String value = modelgenji.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("genji/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_7, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_9.add(table_7, BorderLayout.CENTER);
+		
+		int suonigenji = table_7.getRowCount();
+		lblSuoniGenji = new JLabel("Suoni presenti: " + Integer.toString(suonigenji));
+		lblSuoniGenji.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniGenji.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_9.add(lblSuoniGenji, BorderLayout.NORTH);
+		
+		scrollPane_8 = new JScrollPane();
+		scrollPane_8.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Torbjorn", torbicon, scrollPane_8, null);
+		
+		panel_10 = new JPanel();
+		scrollPane_8.setViewportView(panel_10);
+		panel_10.setLayout(new BorderLayout(0, 0));
+		
+		//Start Torbjorn Table
+		table_8 = new JTable();
+		DefaultTableModel modeltorb = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_8.setModel(modeltorb);
+    	modeltorb.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputtorb = getClass().getClassLoader().getResourceAsStream("torbjorn/masterlisttorb.txt");
+    	InputStreamReader inputtorbreader = new InputStreamReader (inputtorb);
+    	BufferedReader brtorb = new BufferedReader (inputtorbreader);
+		Object[] rowtorb = new Object[1];
+		for (String line9 = brtorb.readLine(); line9 != null; line9 = brtorb.readLine()) {
+		rowtorb[0] = line9;
+		modeltorb.addRow(rowtorb);
+		}
+		brtorb.close();
+		table_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_8.getSelectedRow();
+			            	int convertrow = table_8.convertRowIndexToModel(index);
+			                String value = modeltorb.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("torbjorn/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_8, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_10.add(table_8, BorderLayout.CENTER);
+		
+		int suonitorb = table_8.getRowCount();
+		lblSuoniTorbjon = new JLabel("Suoni presenti: " + Integer.toString(suonitorb));
+		lblSuoniTorbjon.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniTorbjon.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_10.add(lblSuoniTorbjon, BorderLayout.NORTH);
+		
+		scrollPane_9 = new JScrollPane();
+		scrollPane_9.getVerticalScrollBar().setUnitIncrement(16);
+
+		tabbedPane.addTab("Hanzo", hanzoicon, scrollPane_9, null);
+		
+		panel_11 = new JPanel();
+		scrollPane_9.setViewportView(panel_11);
+		panel_11.setLayout(new BorderLayout(0, 0));
+		
+		//Start Hanzo Table
+		table_9 = new JTable();
+		DefaultTableModel modelhanzo = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_9.setModel(modelhanzo);
+    	modelhanzo.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputhanzo = getClass().getClassLoader().getResourceAsStream("hanzo/masterlisthanzo.txt");
+    	InputStreamReader inputhanzoreader = new InputStreamReader (inputhanzo);
+    	BufferedReader brhanzo = new BufferedReader (inputhanzoreader);
+		Object[] rowhanzo = new Object[1];
+		for (String line10 = brhanzo.readLine(); line10 != null; line10 = brhanzo.readLine()) {
+		rowhanzo[0] = line10;
+		modelhanzo.addRow(rowhanzo);
+		}
+		brhanzo.close();
+		table_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_9.getSelectedRow();
+			            	int convertrow = table_9.convertRowIndexToModel(index);
+			                String value = modelhanzo.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("hanzo/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_9, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_11.add(table_9, BorderLayout.CENTER);
+		
+		int suonihanzo = table_9.getRowCount();
+		lblSuoniHanzo = new JLabel("Suoni presenti: " + Integer.toString(suonihanzo));
+		lblSuoniHanzo.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniHanzo.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_11.add(lblSuoniHanzo, BorderLayout.NORTH);
+		
+		scrollPane_10 = new JScrollPane();
+		scrollPane_10.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Doomfist", doomicon, scrollPane_10, null);
+		
+		panel_12 = new JPanel();
+		scrollPane_10.setViewportView(panel_12);
+		panel_12.setLayout(new BorderLayout(0, 0));
+		
+		//Start Doom Table
+		table_10 = new JTable();
+		DefaultTableModel modeldoom = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_10.setModel(modeldoom);
+    	modeldoom.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputdoom = getClass().getClassLoader().getResourceAsStream("doomfist/masterlistdoom.txt");
+    	InputStreamReader inputdoomreader = new InputStreamReader (inputdoom);
+    	BufferedReader brdoom = new BufferedReader (inputdoomreader);
+		Object[] rowdoom = new Object[1];
+		for (String line11 = brdoom.readLine(); line11 != null; line11 = brdoom.readLine()) {
+		rowdoom[0] = line11;
+		modeldoom.addRow(rowdoom);
+		}
+		brdoom.close();
+		table_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_10.getSelectedRow();
+			            	int convertrow = table_10.convertRowIndexToModel(index);
+			                String value = modeldoom.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("doomfist/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_10, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_12.add(table_10, BorderLayout.CENTER);
+		
+		int suonidoom = table_10.getRowCount();
+		lblSuoniDoom = new JLabel("Suoni presenti: " + Integer.toString(suonidoom));
+		lblSuoniDoom.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniDoom.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_12.add(lblSuoniDoom, BorderLayout.NORTH);
+		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
@@ -781,6 +1114,10 @@ public class GUI extends JFrame {
 	    TableRowSorter<DefaultTableModel>filter4 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_4.getModel());
 	    TableRowSorter<DefaultTableModel>filter5 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_5.getModel());
 	    TableRowSorter<DefaultTableModel>filter6 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_6.getModel());
+	    TableRowSorter<DefaultTableModel>filter7 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_7.getModel());
+	    TableRowSorter<DefaultTableModel>filter8 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_8.getModel());
+	    TableRowSorter<DefaultTableModel>filter9 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_9.getModel());
+	    TableRowSorter<DefaultTableModel>filter10 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_10.getModel());
 
 
 		textField.addKeyListener(new KeyAdapter() {
@@ -821,6 +1158,27 @@ public class GUI extends JFrame {
 			       table_6.setRowSorter(filter6);
 			       String text6 = textField.getText();
 			       filter6.setRowFilter(RowFilter.regexFilter(text6));
+			       
+			       //Genji
+			       table_7.setRowSorter(filter7);
+			       String text7 = textField.getText();
+			       filter7.setRowFilter(RowFilter.regexFilter(text7));
+			       
+			       //Torbjorn
+			       table_8.setRowSorter(filter8);
+			       String text8 = textField.getText();
+			       filter8.setRowFilter(RowFilter.regexFilter(text8));
+			       
+			       //Hanzo
+			       table_9.setRowSorter(filter9);
+			       String text9 = textField.getText();
+			       filter9.setRowFilter(RowFilter.regexFilter(text9));
+			       
+			       //Doom
+			       table_10.setRowSorter(filter10);
+			       String text10 = textField.getText();
+			       filter10.setRowFilter(RowFilter.regexFilter(text10));
+			       
 			}
 		});
 		
@@ -842,7 +1200,10 @@ public class GUI extends JFrame {
 			    filter4.setRowFilter(RowFilter.regexFilter(""));
 			    filter5.setRowFilter(RowFilter.regexFilter(""));
 			    filter6.setRowFilter(RowFilter.regexFilter(""));
-
+			    filter7.setRowFilter(RowFilter.regexFilter(""));
+			    filter8.setRowFilter(RowFilter.regexFilter(""));
+			    filter9.setRowFilter(RowFilter.regexFilter(""));
+			    filter10.setRowFilter(RowFilter.regexFilter(""));
 
 
 			}
