@@ -24,4 +24,4 @@ This application is under construction so many heroes will be added soon.
 
 Download the application here:
 
-https://ufile.io/6dg59
+https://ufile.io/qxtmpe2l
