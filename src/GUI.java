@@ -68,6 +68,9 @@ public class GUI extends JFrame {
 	ImageIcon torbicon = new ImageIcon (getClass().getResource("torbicon.png"));
 	ImageIcon hanzoicon = new ImageIcon (getClass().getResource("hanzoicon.png"));
 	ImageIcon doomicon = new ImageIcon (getClass().getResource("doomicon.png"));
+	ImageIcon junkicon = new ImageIcon (getClass().getResource("junkicon.png"));
+	ImageIcon mcicon = new ImageIcon (getClass().getResource("mcicon.png"));
+
 
 	private JLabel label;
 	private JLabel label_1;
@@ -123,6 +126,14 @@ public class GUI extends JFrame {
 	private JPanel panel_12;
 	private JTable table_10;
 	private JLabel lblSuoniDoom;
+	private JScrollPane scrollPane_11;
+	private JPanel panel_13;
+	private JTable table_11;
+	private JLabel lblSuoniJunk;
+	private JScrollPane scrollPane_12;
+	private JPanel panel_14;
+	private JTable table_12;
+	private JLabel lblSuoniMc;
 
 	/**
 	 * Launch the application.
@@ -153,9 +164,9 @@ public class GUI extends JFrame {
 	 * @throws IOException 
 	 */
 	public GUI() throws URISyntaxException, IOException {
-		setTitle("Overwatch Sounds Compilation");
+		setTitle("Overwatch Voice Lines Compilation");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 632, 549);
+		setBounds(100, 100, 671, 587);
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -169,7 +180,7 @@ public class GUI extends JFrame {
 		JMenuItem mntmCredits = new JMenuItem("Credits");
 		mntmCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(contentPane, "Overwatch Sounds Compilation v0.05a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Overwatch Voice Lines Compilation v0.06a\nSviluppato da Simone Mallia\nGrazie per utilizzare la mia applicazione :)", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(mntmCredits);
@@ -178,7 +189,7 @@ public class GUI extends JFrame {
 		mntmVaiAlSito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					URI sitoweb = new URI("https://github.com/simonemallia/overwatchsounds_it");
+					URI sitoweb = new URI("https://github.com/simonemallia/overwatchvoicelines_it");
 					if (Desktop.isDesktopSupported()) {
 						Desktop.getDesktop().browse(sitoweb);
 					}
@@ -218,7 +229,7 @@ public class GUI extends JFrame {
 		label.setIcon(overwatch);
 		panel.add(label);
 		
-		label_1 = new JLabel("Overwatch Sounds Compilation");
+		label_1 = new JLabel("Overwatch Voice Lines Compilation");
 		label_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("Dialog", Font.BOLD, 25));
@@ -311,7 +322,7 @@ public class GUI extends JFrame {
 		panel_2.add(table);
 		
 		int suonirein = table.getRowCount();
-		lblSuoniRein = new JLabel("Suoni presenti: " + Integer.toString(suonirein));
+		lblSuoniRein = new JLabel("Suoni presenti: " + Integer.toString(suonirein) + " - Doppiatore: Paolo Marchese");
 		lblSuoniRein.setFont(new Font("Dialog", Font.BOLD, 11));
 		
 		lblSuoniRein.setHorizontalAlignment(SwingConstants.CENTER);
@@ -391,7 +402,7 @@ public class GUI extends JFrame {
 		panel_3.add(table_1);
 
 		int suoniwinston = table_1.getRowCount();
-		lblSuoniWinston = new JLabel("Suoni presenti: " + Integer.toString(suoniwinston));
+		lblSuoniWinston = new JLabel("Suoni presenti: " + Integer.toString(suoniwinston) + " - Doppiatore: Dario Oppido");
 		lblSuoniWinston.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuoniWinston.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_3.add(lblSuoniWinston, BorderLayout.NORTH);
@@ -471,7 +482,7 @@ public class GUI extends JFrame {
 		
 		
 		int suonidva = table_2.getRowCount();
-		lblSuoniDva = new JLabel("Suoni presenti: " + Integer.toString(suonidva));
+		lblSuoniDva = new JLabel("Suoni presenti: " + Integer.toString(suonidva) + " - Doppiatrice: Martina Felli");
 		lblSuoniDva.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblSuoniDva.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_4.add(lblSuoniDva, BorderLayout.NORTH);
@@ -550,7 +561,7 @@ public class GUI extends JFrame {
 		panel_5.add(table_3, BorderLayout.CENTER);
 		
 		int suoniorisa = table_3.getRowCount();
-		lblSuoniOrisa = new JLabel("Suoni presenti: " + Integer.toString(suoniorisa));
+		lblSuoniOrisa = new JLabel("Suoni presenti: " + Integer.toString(suoniorisa) + " - Doppiatrice: Elisabetta Spinelli");
 		lblSuoniOrisa.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuoniOrisa.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_5.add(lblSuoniOrisa, BorderLayout.NORTH);
@@ -628,7 +639,7 @@ public class GUI extends JFrame {
 		panel_6.add(table_4, BorderLayout.CENTER);
 		
 		int suonihog = table_4.getRowCount();
-		lblSuoniHog = new JLabel("Suoni presenti: " + Integer.toString(suonihog));
+		lblSuoniHog = new JLabel("Suoni presenti: " + Integer.toString(suonihog) + " - Doppiatore: Renzo Ferrini");
 		lblSuoniHog.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuoniHog.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_6.add(lblSuoniHog, BorderLayout.NORTH);
@@ -706,7 +717,7 @@ public class GUI extends JFrame {
 		panel_7.add(table_5, BorderLayout.CENTER);
 		
 		int suoniwreck = table_5.getRowCount();
-		lblSuoniWreck = new JLabel("Suoni presenti: " + Integer.toString(suoniwreck));
+		lblSuoniWreck = new JLabel("Suoni presenti: " + Integer.toString(suoniwreck) + " - Doppiatore non individuato");
 		lblSuoniWreck.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblSuoniWreck.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblSuoniWreck, BorderLayout.NORTH);
@@ -784,7 +795,7 @@ public class GUI extends JFrame {
 		panel_8.add(table_6, BorderLayout.CENTER);
 		
 		int suonizarya = table_6.getRowCount();
-		lblSuoniZarya = new JLabel("Suoni presenti: " + Integer.toString(suonizarya));
+		lblSuoniZarya = new JLabel("Suoni presenti: " + Integer.toString(suonizarya) + " - Doppiatrice: Maddalena Vadacca");
 		lblSuoniZarya.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblSuoniZarya.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_8.add(lblSuoniZarya, BorderLayout.NORTH);
@@ -862,7 +873,7 @@ public class GUI extends JFrame {
 		panel_9.add(table_7, BorderLayout.CENTER);
 		
 		int suonigenji = table_7.getRowCount();
-		lblSuoniGenji = new JLabel("Suoni presenti: " + Integer.toString(suonigenji));
+		lblSuoniGenji = new JLabel("Suoni presenti: " + Integer.toString(suonigenji) + " - Doppiatore: Paolo De Santis");
 		lblSuoniGenji.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuoniGenji.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_9.add(lblSuoniGenji, BorderLayout.NORTH);
@@ -940,7 +951,7 @@ public class GUI extends JFrame {
 		panel_10.add(table_8, BorderLayout.CENTER);
 		
 		int suonitorb = table_8.getRowCount();
-		lblSuoniTorbjon = new JLabel("Suoni presenti: " + Integer.toString(suonitorb));
+		lblSuoniTorbjon = new JLabel("Suoni presenti: " + Integer.toString(suonitorb) + " - Doppiatore: Mario Scarabelli");
 		lblSuoniTorbjon.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblSuoniTorbjon.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_10.add(lblSuoniTorbjon, BorderLayout.NORTH);
@@ -1019,7 +1030,7 @@ public class GUI extends JFrame {
 		panel_11.add(table_9, BorderLayout.CENTER);
 		
 		int suonihanzo = table_9.getRowCount();
-		lblSuoniHanzo = new JLabel("Suoni presenti: " + Integer.toString(suonihanzo));
+		lblSuoniHanzo = new JLabel("Suoni presenti: " + Integer.toString(suonihanzo) + " - Doppiatore: Lorenzo Scattorin");
 		lblSuoniHanzo.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblSuoniHanzo.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_11.add(lblSuoniHanzo, BorderLayout.NORTH);
@@ -1097,10 +1108,166 @@ public class GUI extends JFrame {
 		panel_12.add(table_10, BorderLayout.CENTER);
 		
 		int suonidoom = table_10.getRowCount();
-		lblSuoniDoom = new JLabel("Suoni presenti: " + Integer.toString(suonidoom));
+		lblSuoniDoom = new JLabel("Suoni presenti: " + Integer.toString(suonidoom) + " - Doppiatore: Massimo Corvo");
 		lblSuoniDoom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuoniDoom.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_12.add(lblSuoniDoom, BorderLayout.NORTH);
+		
+		scrollPane_11 = new JScrollPane();
+		scrollPane_11.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Junkrat", junkicon, scrollPane_11, null);
+		
+		panel_13 = new JPanel();
+		scrollPane_11.setViewportView(panel_13);
+		panel_13.setLayout(new BorderLayout(0, 0));
+		
+		//Start Junkrat Table
+		table_11 = new JTable();
+		DefaultTableModel modeljunk = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_11.setModel(modeljunk);
+    	modeljunk.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputjunk = getClass().getClassLoader().getResourceAsStream("junkrat/masterlistjunk.txt");
+    	InputStreamReader inputjunkreader = new InputStreamReader (inputjunk);
+    	BufferedReader brjunk = new BufferedReader (inputjunkreader);
+		Object[] rowjunk = new Object[1];
+		for (String line12 = brjunk.readLine(); line12 != null; line12 = brjunk.readLine()) {
+		rowjunk[0] = line12;
+		modeljunk.addRow(rowjunk);
+		}
+		brjunk.close();
+		table_11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_11.getSelectedRow();
+			            	int convertrow = table_11.convertRowIndexToModel(index);
+			                String value = modeljunk.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("junkrat/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_11, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_13.add(table_11, BorderLayout.CENTER);
+		
+		int suonijunk = table_11.getRowCount();
+		lblSuoniJunk = new JLabel("Suoni presenti: " + Integer.toString(suonijunk) + " - Doppiatore: Matteo Zanotti");
+		lblSuoniJunk.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniJunk.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_13.add(lblSuoniJunk, BorderLayout.NORTH);
+		
+		scrollPane_12 = new JScrollPane();
+		scrollPane_12.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("McCree", mcicon, scrollPane_12, null);
+		
+		panel_14 = new JPanel();
+		scrollPane_12.setViewportView(panel_14);
+		panel_14.setLayout(new BorderLayout(0, 0));
+		
+		//Start McCree Table
+		table_12 = new JTable();
+		DefaultTableModel modelmc = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_12.setModel(modelmc);
+    	modelmc.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputmc = getClass().getClassLoader().getResourceAsStream("mccree/masterlistmc.txt");
+    	InputStreamReader inputmcreader = new InputStreamReader (inputmc);
+    	BufferedReader brmc = new BufferedReader (inputmcreader);
+		Object[] rowmc = new Object[1];
+		for (String line13 = brmc.readLine(); line13 != null; line13 = brmc.readLine()) {
+		rowmc[0] = line13;
+		modelmc.addRow(rowmc);
+		}
+		brmc.close();
+		table_12.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_12.getSelectedRow();
+			            	int convertrow = table_12.convertRowIndexToModel(index);
+			                String value = modelmc.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("mccree/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_12, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_14.add(table_12, BorderLayout.CENTER);
+		
+		int suonimc = table_12.getRowCount();
+		lblSuoniMc = new JLabel("Suoni presenti: " + Integer.toString(suonimc) + " - Doppiatore: Alessandro D'Errico");
+		lblSuoniMc.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniMc.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_14.add(lblSuoniMc, BorderLayout.NORTH);
 		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
@@ -1118,6 +1285,8 @@ public class GUI extends JFrame {
 	    TableRowSorter<DefaultTableModel>filter8 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_8.getModel());
 	    TableRowSorter<DefaultTableModel>filter9 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_9.getModel());
 	    TableRowSorter<DefaultTableModel>filter10 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_10.getModel());
+	    TableRowSorter<DefaultTableModel>filter11 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_11.getModel());
+	    TableRowSorter<DefaultTableModel>filter12 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_12.getModel());
 
 
 		textField.addKeyListener(new KeyAdapter() {
@@ -1179,6 +1348,16 @@ public class GUI extends JFrame {
 			       String text10 = textField.getText();
 			       filter10.setRowFilter(RowFilter.regexFilter(text10));
 			       
+			       //Junkrat
+			       table_11.setRowSorter(filter11);
+			       String text11 = textField.getText();
+			       filter11.setRowFilter(RowFilter.regexFilter(text11));
+			       
+			       //McCree
+			       table_12.setRowSorter(filter12);
+			       String text12 = textField.getText();
+			       filter12.setRowFilter(RowFilter.regexFilter(text12));
+			       
 			}
 		});
 		
@@ -1204,7 +1383,8 @@ public class GUI extends JFrame {
 			    filter8.setRowFilter(RowFilter.regexFilter(""));
 			    filter9.setRowFilter(RowFilter.regexFilter(""));
 			    filter10.setRowFilter(RowFilter.regexFilter(""));
-
+			    filter11.setRowFilter(RowFilter.regexFilter(""));
+			    filter12.setRowFilter(RowFilter.regexFilter(""));
 
 			}
 		});
