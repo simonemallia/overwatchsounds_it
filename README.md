@@ -1,7 +1,13 @@
-# overwatchsounds_it
+# overwatchvoicelines_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New update v0.05a:
+New update v0.06a:
+- Added Junkrat and McCree voice lines;
+- Application's name changed;
+- Application's icon changed;
+- Added voice actors' names;
+
+v0.05a:
 - Added Genji, Torbjorn, Hanzo and Doomfist voice lines;
 
 v0.04a:
