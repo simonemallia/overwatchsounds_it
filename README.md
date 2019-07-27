@@ -4,7 +4,7 @@ This desktop application written in Java contains all voice lines of your favour
 New update v0.07a:
 - Added Mei, Pharah and Reaper voice lines;
 - UI enhanced;
-- New hero's menus added (under construction);
+- New heroes's menus added (under construction);
 
 v0.06a:
 - Added Junkrat and McCree voice lines;
