@@ -1,7 +1,12 @@
 # overwatchvoicelines_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New update v0.06a:
+New update v0.07a:
+- Added Mei, Pharah and Reaper voice lines;
+- UI enhanced;
+- New hero's menu added (under construction)
+
+v0.06a:
 - Added Junkrat and McCree voice lines;
 - Application's name changed;
 - Application's icon changed;
