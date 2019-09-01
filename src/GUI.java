@@ -77,7 +77,8 @@ public class GUI extends JFrame {
 	ImageIcon meicon = new ImageIcon (getClass().getResource("meicon.png"));
 	ImageIcon pharicon = new ImageIcon (getClass().getResource("pharicon.png"));
 	ImageIcon reapicon = new ImageIcon (getClass().getResource("reapicon.png"));
-
+	ImageIcon soldiericon = new ImageIcon (getClass().getResource("soldiericon.png"));
+	ImageIcon sombraicon = new ImageIcon (getClass().getResource("sombraicon.png"));
 
 	private JLabel label;
 	private JLabel label_1;
@@ -162,6 +163,25 @@ public class GUI extends JFrame {
 	private JMenuItem mntmRoadhog;
 	private JMenuItem mntmWreckingBall;
 	private JMenuItem mntmZarya;
+	private JScrollPane scrollPane_16;
+	private JPanel panel_18;
+	private JTable table_16;
+	private JLabel lblSuoniSoldato;
+	private JScrollPane scrollPane_17;
+	private JPanel panel_19;
+	private JTable table_17;
+	private JLabel lblSuoniSombra;
+	private JMenuItem mntmGenji;
+	private JMenuItem mntmTorbjorn;
+	private JMenuItem mntmHanzo;
+	private JMenuItem mntmDoomfist;
+	private JMenuItem mntmJunkrat;
+	private JMenuItem mntmMccree;
+	private JMenuItem mntmMei;
+	private JMenuItem mntmPharah;
+	private JMenuItem mntmReaper;
+	private JMenuItem mntmSoldato;
+	private JMenuItem mntmSombra;
 
 	/**
 	 * Launch the application.
@@ -268,12 +288,100 @@ public class GUI extends JFrame {
 		mnDps = new JMenu("Attaccanti");
 		mnDps.setIcon(damageicon);
 		menuBar.add(mnDps);
+		
+		mntmGenji = new JMenuItem("Genji");
+		mntmGenji.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(7);
+			}
+		});
+		mnDps.add(mntmGenji);
+		
+		mntmTorbjorn = new JMenuItem("Torbjorn");
+		mntmTorbjorn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(8);
+			}
+		});
+		mnDps.add(mntmTorbjorn);
+		
+		mntmHanzo = new JMenuItem("Hanzo");
+		mntmHanzo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(9);
+			}
+		});
+		mnDps.add(mntmHanzo);
+		
+		mntmDoomfist = new JMenuItem("Doomfist");
+		mntmDoomfist.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(10);
+			}
+		});
+		mnDps.add(mntmDoomfist);
+		
+		mntmJunkrat = new JMenuItem("Junkrat");
+		mntmJunkrat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(11);
+			}
+		});
+		mnDps.add(mntmJunkrat);
+		
+		mntmMccree = new JMenuItem("McCree");
+		mntmMccree.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(12);
+			}
+		});
+		mnDps.add(mntmMccree);
+		
+		mntmMei = new JMenuItem("Mei");
+		mntmMei.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(13);
+			}
+		});
+		mnDps.add(mntmMei);
+		
+		mntmPharah = new JMenuItem("Pharah");
+		mntmPharah.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(14);
+			}
+		});
+		mnDps.add(mntmPharah);
+		
+		mntmReaper = new JMenuItem("Reaper");
+		mntmReaper.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(15);
+			}
+		});
+		mnDps.add(mntmReaper);
+		
+		mntmSoldato = new JMenuItem("Soldato 76");
+		mntmSoldato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(16);
+			}
+		});
+		mnDps.add(mntmSoldato);
+		
+		mntmSombra = new JMenuItem("Sombra");
+		mntmSombra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(17);
+			}
+		});
+		mnDps.add(mntmSombra);
 		menuBar.add(menu);
 		
 		JMenuItem mntmCredits = new JMenuItem("Informazioni");
 		mntmCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(contentPane, "Overwatch Voice Lines Compilation v0.07a\nSviluppatore: Simone Mallia\nDisclaimer: I contenuti dell'applicazione (suoni, immagini e loghi di Overwatch)\nappartengono alla Blizzard Entertainment, Inc.\nIcone fornite da Icons8.com", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Overwatch Voice Lines Compilation v0.08a\nSviluppatore: Simone Mallia\nDisclaimer: I contenuti dell'applicazione (suoni, immagini e loghi di Overwatch)\nappartengono alla Blizzard Entertainment, Inc.\nIcone fornite da Icons8.com", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(mntmCredits);
@@ -1612,6 +1720,164 @@ public class GUI extends JFrame {
 		lblSuoniReap.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_17.add(lblSuoniReap, BorderLayout.NORTH);
 		
+		scrollPane_16 = new JScrollPane();
+		scrollPane_16.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Soldato 76", soldiericon, scrollPane_16, null);
+		
+		panel_18 = new JPanel();
+		scrollPane_16.setViewportView(panel_18);
+		panel_18.setLayout(new BorderLayout(0, 0));
+		
+		//Start Soldier76 Table
+		table_16 = new JTable();
+		DefaultTableModel modelsold = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_16.setModel(modelsold);
+    	modelsold.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputsold = getClass().getClassLoader().getResourceAsStream("soldato76/masterlistsold.txt");
+    	InputStreamReader inputsoldreader = new InputStreamReader (inputsold);
+    	BufferedReader brsold = new BufferedReader (inputsoldreader);
+		Object[] rowsold = new Object[1];
+		for (String line17 = brsold.readLine(); line17 != null; line17 = brsold.readLine()) {
+		rowsold[0] = line17;
+		modelsold.addRow(rowsold);
+		}
+		brsold.close();
+		table_16.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_16.getSelectedRow();
+			            	int convertrow = table_16.convertRowIndexToModel(index);
+			                String value = modelsold.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("soldato76/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_16, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_18.add(table_16, BorderLayout.CENTER);
+		
+		int suonisold = table_16.getRowCount();
+		lblSuoniSoldato = new JLabel("Suoni presenti: " + Integer.toString(suonisold) + " - Doppiatore: Roberto Draghetti");
+		lblSuoniSoldato.setIcon(info12);
+		lblSuoniSoldato.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniSoldato.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_18.add(lblSuoniSoldato, BorderLayout.NORTH);
+		
+		scrollPane_17 = new JScrollPane();
+		scrollPane_17.getVerticalScrollBar().setUnitIncrement(16);
+		tabbedPane.addTab("Sombra", sombraicon, scrollPane_17, null);
+		
+		panel_19 = new JPanel();
+		scrollPane_17.setViewportView(panel_19);
+		panel_19.setLayout(new BorderLayout(0, 0));
+		
+		//Start Sombra Table
+		table_17 = new JTable();
+		DefaultTableModel modelsomb = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_17.setModel(modelsomb);
+    	modelsomb.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputsomb = getClass().getClassLoader().getResourceAsStream("sombra/masterlistsomb.txt");
+    	InputStreamReader inputsombreader = new InputStreamReader (inputsomb);
+    	BufferedReader brsomb = new BufferedReader (inputsombreader);
+		Object[] rowsomb = new Object[1];
+		for (String line18 = brsomb.readLine(); line18 != null; line18 = brsomb.readLine()) {
+		rowsomb[0] = line18;
+		modelsomb.addRow(rowsomb);
+		}
+		brsomb.close();
+		table_17.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_17.getSelectedRow();
+			            	int convertrow = table_17.convertRowIndexToModel(index);
+			                String value = modelsomb.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("sombra/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_17, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_19.add(table_17, BorderLayout.CENTER);
+		
+		int suonisomb = table_17.getRowCount();
+		lblSuoniSombra = new JLabel("Suoni presenti: " + Integer.toString(suonisomb) + " - Doppiatrice: Tiziana Martello");
+		lblSuoniSombra.setIcon(info12);
+		lblSuoniSombra.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniSombra.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_19.add(lblSuoniSombra, BorderLayout.NORTH);
+		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
@@ -1633,6 +1899,8 @@ public class GUI extends JFrame {
 	    TableRowSorter<DefaultTableModel>filter13 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_13.getModel());
 	    TableRowSorter<DefaultTableModel>filter14 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_14.getModel());
 	    TableRowSorter<DefaultTableModel>filter15 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_15.getModel());
+	    TableRowSorter<DefaultTableModel>filter16 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_16.getModel());
+	    TableRowSorter<DefaultTableModel>filter17 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_17.getModel());
 
 
 		textField.addKeyListener(new KeyAdapter() {
@@ -1718,6 +1986,16 @@ public class GUI extends JFrame {
 			       table_15.setRowSorter(filter15);
 			       String text15 = textField.getText();
 			       filter15.setRowFilter(RowFilter.regexFilter(text15));
+			       
+			       //Soldato 76
+			       table_16.setRowSorter(filter16);
+			       String text16 = textField.getText();
+			       filter16.setRowFilter(RowFilter.regexFilter(text16));
+			       
+			       //Sombra
+			       table_17.setRowSorter(filter17);
+			       String text17 = textField.getText();
+			       filter17.setRowFilter(RowFilter.regexFilter(text17));
 			}
 		});
 		
@@ -1748,6 +2026,8 @@ public class GUI extends JFrame {
 			    filter13.setRowFilter(RowFilter.regexFilter(""));
 			    filter14.setRowFilter(RowFilter.regexFilter(""));
 			    filter15.setRowFilter(RowFilter.regexFilter(""));
+			    filter16.setRowFilter(RowFilter.regexFilter(""));
+			    filter17.setRowFilter(RowFilter.regexFilter(""));
 
 
 			}
