@@ -1,7 +1,7 @@
 # overwatchvoicelines_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New Update v.0.08a:
+New update v.0.08a:
 - Added Soldato 76 and Sombra voice lines;
 
 v0.07a:
