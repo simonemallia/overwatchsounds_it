@@ -1,7 +1,10 @@
 # overwatchvoicelines_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New update v0.07a:
+New Update v.0.08a:
+- Added Soldato 76 and Sombra voice lines;
+
+v0.07a:
 - Added Mei, Pharah and Reaper voice lines;
 - UI enhanced;
 - New heroes menu added (under construction);
