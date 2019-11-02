@@ -1,7 +1,11 @@
 # overwatchvoicelines_it
 This desktop application written in Java contains all voice lines of your favourite heroes in Overwatch in italian version!
 
-New update v.0.08a:
+New update v0.09a:
+- Menu updated;
+- Added Tracer, Symmetra, Widowmaker and Ana voice lines;
+
+Update v.0.08a:
 - Added Soldato 76 and Sombra voice lines;
 
 v0.07a:
