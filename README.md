@@ -42,4 +42,4 @@ This application is under construction so many heroes will be added soon.
 
 Download the application here:
 
-https://ufile.io/nvbptupr
+https://ufile.io/b87a9sz0
