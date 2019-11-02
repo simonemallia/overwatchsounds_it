@@ -59,6 +59,7 @@ public class GUI extends JFrame {
 	ImageIcon question = new ImageIcon (getClass().getResource("question.png"));
 	ImageIcon damageicon = new ImageIcon (getClass().getResource("damageicon.png"));
 	ImageIcon tankicon = new ImageIcon (getClass().getResource("tankicon.png"));
+	ImageIcon supporticon = new ImageIcon (getClass().getResource("supporticon.png"));
 	ImageIcon info12 = new ImageIcon(getClass().getResource("info12.png"));
 	ImageIcon delete = new ImageIcon (getClass().getResource("delete.png"));
 	ImageIcon reinicon = new ImageIcon(getClass().getResource("reinicon.png"));
@@ -79,6 +80,12 @@ public class GUI extends JFrame {
 	ImageIcon reapicon = new ImageIcon (getClass().getResource("reapicon.png"));
 	ImageIcon soldiericon = new ImageIcon (getClass().getResource("soldiericon.png"));
 	ImageIcon sombraicon = new ImageIcon (getClass().getResource("sombraicon.png"));
+	ImageIcon traicon = new ImageIcon (getClass().getResource("traicon.png"));
+	ImageIcon symicon = new ImageIcon (getClass().getResource("symicon.png"));
+	ImageIcon widicon = new ImageIcon (getClass().getResource("widowicon.png"));
+	ImageIcon anaicon = new ImageIcon (getClass().getResource("anaicon.png"));
+	
+
 
 	private JLabel label;
 	private JLabel label_1;
@@ -182,6 +189,28 @@ public class GUI extends JFrame {
 	private JMenuItem mntmReaper;
 	private JMenuItem mntmSoldato;
 	private JMenuItem mntmSombra;
+	private JScrollPane scrollPane_18;
+	private JPanel panel_20;
+	private JLabel lblSuoniTracer;
+	private JTable table_18;
+	private JScrollPane scrollPane_19;
+	private JPanel panel_21;
+	private JLabel lblSuoniSym;
+	private JTable table_19;
+	private JMenuItem mntmTracer;
+	private JMenuItem mntmSymmetra;
+	private JMenuItem mntmEsci;
+	private JScrollPane scrollPane_20;
+	private JPanel panel_22;
+	private JTable table_20;
+	private JLabel lblSuoniWid;
+	private JMenuItem mntmWidowmaker;
+	private JMenu mnSupporto;
+	private JScrollPane scrollPane_21;
+	private JPanel panel_23;
+	private JTable table_21;
+	private JLabel lblSuoniAna;
+	private JMenuItem mntmAna;
 
 	/**
 	 * Launch the application.
@@ -376,12 +405,48 @@ public class GUI extends JFrame {
 			}
 		});
 		mnDps.add(mntmSombra);
+		
+		mntmTracer = new JMenuItem("Tracer");
+		mntmTracer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(18);
+			}
+		});
+		mnDps.add(mntmTracer);
+		
+		mntmSymmetra = new JMenuItem("Symmetra");
+		mntmSymmetra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(19);
+			}
+		});
+		mnDps.add(mntmSymmetra);
+		
+		mntmWidowmaker = new JMenuItem("Widowmaker");
+		mntmWidowmaker.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(20);
+			}
+		});
+		mnDps.add(mntmWidowmaker);
+		
+		mnSupporto = new JMenu("Supporto");
+		mnSupporto.setIcon(supporticon);
+		menuBar.add(mnSupporto);
+		
+		mntmAna = new JMenuItem("Ana");
+		mntmAna.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tabbedPane.setSelectedIndex(21);
+			}
+		});
+		mnSupporto.add(mntmAna);
 		menuBar.add(menu);
 		
 		JMenuItem mntmCredits = new JMenuItem("Informazioni");
 		mntmCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(contentPane, "Overwatch Voice Lines Compilation v0.08a\nSviluppatore: Simone Mallia\nDisclaimer: I contenuti dell'applicazione (suoni, immagini e loghi di Overwatch)\nappartengono alla Blizzard Entertainment, Inc.\nIcone fornite da Icons8.com", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Overwatch Voice Lines Compilation v0.09a\nSviluppatore: Simone Mallia\nDisclaimer: I contenuti dell'applicazione (suoni, immagini e loghi di Overwatch)\nappartengono alla Blizzard Entertainment, Inc.\nIcone fornite da Icons8.com", "Informazioni", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(mntmCredits);
@@ -414,6 +479,14 @@ public class GUI extends JFrame {
 		});
 		menu.add(mntmLicenza);
 		menu.add(mntmVaiAlSito);
+		
+		mntmEsci = new JMenuItem("Esci");
+		mntmEsci.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		menu.add(mntmEsci);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -1878,6 +1951,323 @@ public class GUI extends JFrame {
 		lblSuoniSombra.setFont(new Font("Dialog", Font.BOLD, 11));
 		panel_19.add(lblSuoniSombra, BorderLayout.NORTH);
 		
+		scrollPane_18 = new JScrollPane();
+		tabbedPane.addTab("Tracer", traicon, scrollPane_18, null);
+		
+		panel_20 = new JPanel();
+		scrollPane_18.setViewportView(panel_20);
+		scrollPane_18.getVerticalScrollBar().setUnitIncrement(16);
+		panel_20.setLayout(new BorderLayout(0, 0));	
+		
+		//Start Tracer Table
+		table_18 = new JTable();
+		DefaultTableModel modeltra = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_18.setModel(modeltra);
+    	modeltra.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputtra = getClass().getClassLoader().getResourceAsStream("tracer/masterlisttracer.txt");
+    	InputStreamReader inputtrareader = new InputStreamReader (inputtra);
+    	BufferedReader brtra = new BufferedReader (inputtrareader);
+		Object[] rowtra = new Object[1];
+		for (String line19 = brtra.readLine(); line19 != null; line19 = brtra.readLine()) {
+		rowtra[0] = line19;
+		modeltra.addRow(rowtra);
+		}
+		brtra.close();
+		table_18.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_18.getSelectedRow();
+			            	int convertrow = table_18.convertRowIndexToModel(index);
+			                String value = modeltra.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("tracer/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_18, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_20.add(table_18, BorderLayout.CENTER);
+		
+		int suonitra = table_18.getRowCount();
+		lblSuoniTracer = new JLabel("Suoni presenti: " + Integer.toString(suonitra) + " - Doppiatrice: Gea Riva");
+		lblSuoniTracer.setIcon(info12);
+		lblSuoniTracer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniTracer.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_20.add(lblSuoniTracer, BorderLayout.NORTH);
+		
+		scrollPane_19 = new JScrollPane();
+		tabbedPane.addTab("Symmetra", symicon, scrollPane_19, null);
+		
+		panel_21 = new JPanel();
+		scrollPane_19.setViewportView(panel_21);
+		scrollPane_19.getVerticalScrollBar().setUnitIncrement(16);
+		panel_21.setLayout(new BorderLayout(0, 0));
+		
+		
+		//Start Symmetra Table
+		table_19 = new JTable();
+		DefaultTableModel modelsym = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_19.setModel(modelsym);
+    	modelsym.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputsym = getClass().getClassLoader().getResourceAsStream("symmetra/masterlistsym.txt");
+    	InputStreamReader inputsymreader = new InputStreamReader (inputsym);
+    	BufferedReader brsym = new BufferedReader (inputsymreader);
+		Object[] rowsym = new Object[1];
+		for (String line20 = brsym.readLine(); line20 != null; line20 = brsym.readLine()) {
+		rowsym[0] = line20;
+		modelsym.addRow(rowsym);
+		}
+		brsym.close();
+		table_19.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_19.getSelectedRow();
+			            	int convertrow = table_19.convertRowIndexToModel(index);
+			                String value = modelsym.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("symmetra/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_19, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_21.add(table_19, BorderLayout.CENTER);
+		
+		int suonisym = table_19.getRowCount();
+		lblSuoniSym = new JLabel("Suoni presenti: " + Integer.toString(suonisym) + " - Doppiatrice: Deborah Morese");
+		lblSuoniSym.setIcon(info12);
+		lblSuoniSym.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuoniSym.setFont(new Font("Dialog", Font.BOLD, 11));
+		panel_21.add(lblSuoniSym, BorderLayout.NORTH);
+		
+		scrollPane_20 = new JScrollPane();
+		tabbedPane.addTab("Widowmaker", widicon, scrollPane_20, null);
+		
+		panel_22 = new JPanel();
+		scrollPane_20.setViewportView(panel_22);
+		scrollPane_20.getVerticalScrollBar().setUnitIncrement(16);
+		panel_22.setLayout(new BorderLayout(0, 0));
+		
+		//Start Widowmaker table
+		table_20 = new JTable();
+		DefaultTableModel modelwid = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_20.setModel(modelwid);
+    	modelwid.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputwid = getClass().getClassLoader().getResourceAsStream("widowmaker/masterlistwid.txt");
+    	InputStreamReader inputwidreader = new InputStreamReader (inputwid);
+    	BufferedReader brwid = new BufferedReader (inputwidreader);
+		Object[] rowwid = new Object[1];
+		for (String line21 = brwid.readLine(); line21 != null; line21 = brwid.readLine()) {
+		rowwid[0] = line21;
+		modelwid.addRow(rowwid);
+		}
+		brwid.close();
+		table_20.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_20.getSelectedRow();
+			            	int convertrow = table_20.convertRowIndexToModel(index);
+			                String value = modelwid.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("widowmaker/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_20, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_22.add(table_20, BorderLayout.CENTER);
+		
+		int suoniwid = table_20.getRowCount();
+		lblSuoniWid = new JLabel("Suoni presenti: " + Integer.toString(suoniwid) + " - Doppiatrice: Francesca Perilli");
+		lblSuoniWid.setIcon(info12);
+		lblSuoniWid.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniWid.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_22.add(lblSuoniWid, BorderLayout.NORTH);
+		
+		scrollPane_21 = new JScrollPane();
+		tabbedPane.addTab("Ana", anaicon, scrollPane_21, null);
+		
+		panel_23 = new JPanel();
+		scrollPane_21.setViewportView(panel_23);
+		scrollPane_21.getVerticalScrollBar().setUnitIncrement(16);
+		panel_23.setLayout(new BorderLayout(0, 0));
+		
+		//Start Ana table
+		table_21 = new JTable();
+		DefaultTableModel modelana = new DefaultTableModel() {
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		        return false;
+		    }
+		};
+		table_21.setModel(modelana);
+    	modelana.setColumnIdentifiers(new String [] {"Suoni"});
+    	InputStream inputana = getClass().getClassLoader().getResourceAsStream("ana/masterlistana.txt");
+    	InputStreamReader inputanareader = new InputStreamReader (inputana);
+    	BufferedReader brana = new BufferedReader (inputanareader);
+		Object[] rowana = new Object[1];
+		for (String line22 = brana.readLine(); line22 != null; line22 = brana.readLine()) {
+		rowana[0] = line22;
+		modelana.addRow(rowana);
+		}
+		brana.close();
+		table_21.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Popup riproduzione = new Popup();		 
+                new Thread(){	
+				public void run() {
+			
+			           try {
+			            	int index = table_21.getSelectedRow();
+			            	int convertrow = table_21.convertRowIndexToModel(index);
+			                String value = modelana.getValueAt(convertrow, 0).toString();
+			                AdvancedPlayer audio = new AdvancedPlayer (getClass().getClassLoader().getResourceAsStream("ana/" + value));			
+							audio.setPlayBackListener(new PlaybackListener() {
+		                        @Override
+		                        public void playbackStarted(PlaybackEvent evt){
+		                        	riproduzione.setLocationRelativeTo(contentPane);
+									riproduzione.setVisible(true);
+									  riproduzione.lblStop.addMouseListener(new MouseAdapter() {
+				    						@Override
+				    						public void mouseClicked(MouseEvent e) {
+				    						audio.stop();
+				    						}
+				    					});
+		                        	
+		                        }
+		                        public void playbackFinished(PlaybackEvent event) {
+		                        	riproduzione.dispose();
+		                        }
+								});   
+		                        audio.play();
+		                       	                        
+							    
+							} catch (ArrayIndexOutOfBoundsException e1) {
+								JOptionPane.showMessageDialog(scrollPane_21, "Per riprodurre il file clicca sul nome presente nella tabella", "Errore", JOptionPane.ERROR_MESSAGE);
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							}
+
+				}
+		        }.start();                  	        
+		}
+			
+	});
+		panel_23.add(table_21, BorderLayout.CENTER);
+		
+		int suoniana = table_21.getRowCount();
+		lblSuoniAna = new JLabel("Suoni presenti: " + Integer.toString(suoniana) + " - Doppiatrice: Elisabetta Cesone");
+		lblSuoniAna.setIcon(info12);
+		lblSuoniAna.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblSuoniAna.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_23.add(lblSuoniAna, BorderLayout.NORTH);
+		
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
@@ -1901,6 +2291,11 @@ public class GUI extends JFrame {
 	    TableRowSorter<DefaultTableModel>filter15 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_15.getModel());
 	    TableRowSorter<DefaultTableModel>filter16 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_16.getModel());
 	    TableRowSorter<DefaultTableModel>filter17 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_17.getModel());
+	    TableRowSorter<DefaultTableModel>filter18 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_18.getModel());
+	    TableRowSorter<DefaultTableModel>filter19 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_19.getModel());
+	    TableRowSorter<DefaultTableModel>filter20 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_20.getModel());
+	    TableRowSorter<DefaultTableModel>filter21 = new TableRowSorter<DefaultTableModel> ((DefaultTableModel) table_21.getModel());
+
 
 
 		textField.addKeyListener(new KeyAdapter() {
@@ -1996,6 +2391,26 @@ public class GUI extends JFrame {
 			       table_17.setRowSorter(filter17);
 			       String text17 = textField.getText();
 			       filter17.setRowFilter(RowFilter.regexFilter(text17));
+			       
+			       //Tracer
+			       table_18.setRowSorter(filter18);
+			       String text18 = textField.getText();
+			       filter18.setRowFilter(RowFilter.regexFilter(text18));
+			       
+			       //Symmetra
+			       table_19.setRowSorter(filter19);
+			       String text19 = textField.getText();
+			       filter19.setRowFilter(RowFilter.regexFilter(text19));
+			       
+			       //Widowmaker
+			       table_20.setRowSorter(filter20);
+			       String text20 = textField.getText();
+			       filter20.setRowFilter(RowFilter.regexFilter(text20));
+			     
+			       //Ana
+			       table_21.setRowSorter(filter21);
+			       String text21 = textField.getText();
+			       filter21.setRowFilter(RowFilter.regexFilter(text21));
 			}
 		});
 		
@@ -2028,6 +2443,10 @@ public class GUI extends JFrame {
 			    filter15.setRowFilter(RowFilter.regexFilter(""));
 			    filter16.setRowFilter(RowFilter.regexFilter(""));
 			    filter17.setRowFilter(RowFilter.regexFilter(""));
+			    filter18.setRowFilter(RowFilter.regexFilter(""));
+			    filter19.setRowFilter(RowFilter.regexFilter(""));
+			    filter20.setRowFilter(RowFilter.regexFilter(""));
+			    filter21.setRowFilter(RowFilter.regexFilter(""));
 
 
 			}
